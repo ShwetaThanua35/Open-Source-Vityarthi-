@@ -1,0 +1,139 @@
+#!/bin/bash
+# Script 1: System Identity Report
+# Author: Shweta Thanua
+
+# --- Variables ---
+STUDENT_NAME="Shweta Thanua"
+SOFTWARE_CHOICE="Python"
+
+# --- System Info ---
+KERNEL=$(uname -r)
+USER_NAME=$(whoami)
+HOME_DIR=$HOME
+UPTIME=$(uptime -p)
+DATE=$(date)
+DISTRO=$(lsb_release -d 2>/dev/null | cut -f2)
+
+# --- Display ---
+echo "===================================="
+echo " Open Source Audit — $STUDENT_NAME"
+echo " Software: $SOFTWARE_CHOICE"
+echo "===================================="
+echo "Kernel Version : $KERNEL"
+echo "User           : $USER_NAME"
+echo "Home Directory : $HOME_DIR"
+echo "OS Distribution: $DISTRO"
+echo "Uptime         : $UPTIME"
+echo "Date & Time    : $DATE"
+echo "License        : GNU General Public License (Linux OS)"
+
+
+#!/bin/bash
+# Script 2: FOSS Package Inspector
+
+PACKAGE="python3"
+
+# Check if Python is installed
+if command -v $PACKAGE &> /dev/null; then
+    echo "$PACKAGE is installed."
+    VERSION=$($PACKAGE --version)
+    echo "Version: $VERSION"
+else
+    echo "$PACKAGE is NOT installed."
+fi
+
+# Case statement for descriptions
+case $PACKAGE in
+    python3)
+        echo "Python: A powerful open-source programming language built by community."
+        ;;
+    git)
+        echo "Git: Distributed version control system."
+        ;;
+    apache2)
+        echo "Apache: Web server powering websites."
+        ;;
+    mysql)
+        echo "MySQL: Open-source database system."
+        ;;
+    *)
+        echo "Unknown package."
+        ;;
+esac\
+
+#!/bin/bash
+# Script 3: Disk and Permission Auditor
+
+DIRS=("/etc" "/var/log" "/home" "/usr/bin" "/tmp")
+
+echo "========== Directory Audit =========="
+
+for DIR in "${DIRS[@]}"; do
+    if [ -d "$DIR" ]; then
+        PERMS=$(ls -ld $DIR | awk '{print $1, $3, $4}')
+        SIZE=$(du -sh $DIR 2>/dev/null | cut -f1)
+        echo "$DIR => Permissions: $PERMS | Size: $SIZE"
+    else
+        echo "$DIR does not exist"
+    fi
+done
+
+echo "-------------------------------------"
+echo "Checking Python configuration folder"
+
+if [ -d "/etc/python3" ]; then
+    ls -ld /etc/python3
+else
+    echo "Python config directory not found"
+fi
+
+#!/bin/bash
+# Script 4: Log File Analyzer
+# Usage: ./script4.sh /path/to/logfile keyword
+
+LOGFILE=$1
+KEYWORD=${2:-"error"}
+COUNT=0
+
+# Check if file exists
+if [ ! -f "$LOGFILE" ]; then
+    echo "Error: File not found!"
+    exit 1
+fi
+
+# Read file line by line
+while IFS= read -r LINE; do
+    if echo "$LINE" | grep -iq "$KEYWORD"; then
+        COUNT=$((COUNT + 1))
+    fi
+done < "$LOGFILE"
+
+echo "-------------------------------------"
+echo "Keyword '$KEYWORD' found $COUNT times in $LOGFILE"
+
+echo "Last 5 matching lines:"
+grep -i "$KEYWORD" "$LOGFILE" | tail -5
+
+#!/bin/bash
+# Script 5: Open Source Manifesto Generator
+
+echo "===== Open Source Manifesto Generator ====="
+
+# User input
+read -p "1. Name one open-source tool you use daily: " TOOL
+read -p "2. In one word, what does 'freedom' mean to you? " FREEDOM
+read -p "3. Name one thing you would build and share: " BUILD
+
+DATE=$(date '+%d %B %Y')
+OUTPUT="manifesto_$(whoami).txt"
+
+# Generate manifesto
+echo "On $DATE, I believe in open source." > $OUTPUT
+echo "Using $TOOL, I understand that freedom means $FREEDOM." >> $OUTPUT
+echo "I aim to build $BUILD and share it freely with the world." >> $OUTPUT
+
+# Output
+echo "-------------------------------------"
+echo "Manifesto saved to $OUTPUT"
+echo "-------------------------------------"
+cat $OUTPUT

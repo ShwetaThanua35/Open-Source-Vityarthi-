@@ -1,0 +1,32 @@
+#!/bin/bash
+# Script 2: FOSS Package Inspector
+
+PACKAGE="python3"
+
+# Check if Python is installed
+if command -v $PACKAGE &> /dev/null; then
+    echo "$PACKAGE is installed."
+    VERSION=$($PACKAGE --version)
+    echo "Version: $VERSION"
+else
+    echo "$PACKAGE is NOT installed."
+fi
+
+# Case statement for descriptions
+case $PACKAGE in
+    python3)
+        echo "Python: A powerful open-source programming language built by community."
+        ;;
+    git)
+        echo "Git: Distributed version control system."
+        ;;
+    apache2)
+        echo "Apache: Web server powering websites."
+        ;;
+    mysql)
+        echo "MySQL: Open-source database system."
+        ;;
+    *)
+        echo "Unknown package."
+        ;;
+esac\

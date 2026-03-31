@@ -1,0 +1,28 @@
+#!/bin/bash
+# Script 1: System Identity Report
+# Author: Shweta Thanua
+
+# --- Variables ---
+STUDENT_NAME="Shweta Thanua"
+SOFTWARE_CHOICE="Python"
+
+# --- System Info ---
+KERNEL=$(uname -r)
+USER_NAME=$(whoami)
+HOME_DIR=$HOME
+UPTIME=$(uptime -p)
+DATE=$(date)
+DISTRO=$(lsb_release -d 2>/dev/null | cut -f2)
+
+# --- Display ---
+echo "===================================="
+echo " Open Source Audit — $STUDENT_NAME"
+echo " Software: $SOFTWARE_CHOICE"
+echo "===================================="
+echo "Kernel Version : $KERNEL"
+echo "User           : $USER_NAME"
+echo "Home Directory : $HOME_DIR"
+echo "OS Distribution: $DISTRO"
+echo "Uptime         : $UPTIME"
+echo "Date & Time    : $DATE"
+echo "License        : GNU General Public License (Linux OS)"
